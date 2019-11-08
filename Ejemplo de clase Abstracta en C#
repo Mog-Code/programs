@@ -1,0 +1,165 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace P19_Clases_Abstractas
+{
+    class program
+    {
+        //Creacion de clase abstracta y sus metododos base
+        abstract class Empleado
+        {
+            protected abstract float SueldoTotal();
+            protected abstract float Aguinaldo();
+            public abstract void DesplegarEmpleado();
+
+            //destructor de la clase abstracta
+            ~Empleado()
+            {
+                Console.WriteLine("Memoria Clase Empleado Liberada");
+            }
+
+        }
+
+        //clase derivada de la clase abstracta
+        class Ebase : Empleado
+        {
+            string NombreB;
+            int DiasTrabajados;
+            float SalarioDiario, Bono;
+
+            //Constructores
+            public Ebase(string NB, int DT, float SD, float Bo)
+            {
+
+                NombreB = NB;
+                DiasTrabajados = DT;
+                SalarioDiario = SD;
+                Bono = Bo;
+
+            }
+
+            //3 metodos en override por se clases derivadas de una clase base
+            protected override float SueldoTotal()
+            {
+                return DiasTrabajados * SalarioDiario + Bono;
+            }
+
+            protected override float Aguinaldo()
+            {
+                return SalarioDiario * 15;
+            }
+
+            public override void DesplegarEmpleado()
+            {
+                Console.WriteLine("Mostrar nombre del Empleado: " + NombreB);
+                Console.WriteLine("Mostrar Dias Trabajados del Empleado: " + DiasTrabajados);
+                Console.WriteLine("Mostrar Salario Diario del Empleado: " + SalarioDiario);
+                Console.WriteLine("Mostrar Bono del Empleado: " + Bono);
+                Console.WriteLine("Mostrar Sueldo Total del Empleado: " + SueldoTotal());
+                Console.WriteLine("Mostrar Aguinaldo del Empleado: " + Aguinaldo());
+
+            }
+
+            //destructor
+            ~Ebase()
+            {
+                Console.WriteLine("Memoria Clase Ebase Liberada");
+            }
+
+        }
+
+        //segunda clase derivada
+        class EConfianza : Empleado
+        {
+            //campos
+            string NombreC;
+            float SueldoSemanal, Compenzacion;
+
+            //constructor
+            public EConfianza(string NC, float SS, float Co)
+            {
+                NombreC = NC;
+                SueldoSemanal = SS;
+                Compenzacion = Co;
+
+            }
+
+            //3 metodos en override
+            protected override float SueldoTotal()
+            {
+                return SueldoSemanal + Compenzacion;
+            }
+
+            protected override float Aguinaldo()
+            {
+                return SueldoSemanal * 4;
+            }
+
+            public override void DesplegarEmpleado()
+            {
+                Console.WriteLine("Mostrar nombre del Empleado: " + NombreC);
+                Console.WriteLine("Mostrar sueldo semanal: " + SueldoSemanal);
+                Console.WriteLine("Mostrar compenzacion: " + Compenzacion);
+                Console.WriteLine("Mostrar Sueldo Total del Empleado: " + SueldoTotal());
+                Console.WriteLine("Mostrar Aguinaldo del Empleado: " + Aguinaldo());
+            }
+
+            //Destructor
+            ~EConfianza()
+            {
+                Console.WriteLine("Memoria Clase EConfinza Liberada");
+
+            }
+
+        }
+        //programa que recopila informacion y crea los objetos de las clases 
+        //programa que tambien corre los metodos ya con su objeto asignado
+
+        static void Main(string[] args)
+        {
+            Console.WriteLine("=Informacion requerida para el calculo de sueldos=");
+
+            Console.WriteLine("Introdusca el Nombre del Empleado de Ebase:");
+            string NB = Console.ReadLine();
+            Console.WriteLine("Introdusca la cantidad de dias trabajados por el Empleado de Ebase:");
+            int DT = Int16.Parse(Console.ReadLine());
+            Console.WriteLine("Introdusca el salario diario del Empleado de Ebase:");
+            float SD = float.Parse(Console.ReadLine());
+            Console.WriteLine("Introdusca la cantidad del bono para el Empleado de Ebase:");
+            float Bo = float.Parse(Console.ReadLine());
+            Ebase ebase = new Ebase(NB, DT, SD, Bo);
+            ebase.DesplegarEmpleado();
+
+            Console.ReadKey();
+            Console.Clear();
+
+            Console.WriteLine("Introdusca el Nombre del Empleado de Econfianza:");
+            string NC = Console.ReadLine();
+            Console.WriteLine("Introdusca el sueldo semanal del Empleado de Econfianza");
+            float SS = float.Parse(Console.ReadLine());
+            Console.WriteLine("Introdusca la cantidad de la compenzacion para el Empleado de Econfianza");
+            float Co = float.Parse(Console.ReadLine());
+            EConfianza eConfianza = new EConfianza(NC, SS, Co);
+            eConfianza.DesplegarEmpleado();
+
+            Console.ReadKey();
+
+            //Fin del programa
+
+
+
+
+
+
+
+
+
+        }
+
+
+    }
+
+}
